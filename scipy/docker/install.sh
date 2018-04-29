@@ -1,6 +1,5 @@
 #!/bin/bash
-set +e
-set -x
+set -exuo pipefail
 
 # Installation script for requirements.txt to get around weird
 # installers for scipy and scikit-learn.  Assumes scipy dependencies
@@ -9,7 +8,7 @@ set -x
 PIP='pip install -t ./ --install-option=--prefix='
 
 export PYTHONPATH=$PWD          # So scikit-learn installer sees
-                                # installations to this dir.
+                                # current installations in this dir.
 
 $PIP `grep '^numpy' requirements.txt`
 $PIP `grep '^scipy' requirements.txt`
