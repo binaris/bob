@@ -108,3 +108,5 @@ ENV/
 
 # vi temporaries
 *.sw[p-z]
+
+.binaris/
