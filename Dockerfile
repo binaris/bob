@@ -14,14 +14,9 @@ RUN apt-get update && apt-get install -y python-dev python-pip curl && apt-get b
 # Directory to copy in for build.  After building, cp this out -- to
 # the same place.  Otherwise pip will have to rebuild everything,
 # every time.
-
-RUN mkdir /function/ /cache/
-ADD dist /function
-ADD .binaris/.pycache /cache
-COPY docker/* /function/
-WORKDIR /function/
-
-# Re-use PIP cache between runs.  Do *NOT* copy this out!
-ENV XDG_CACHE_HOME=/cache/
-
-CMD [ "./install.sh" ]
+RUN pip install virtualenv
+COPY oldrequirements.txt /tmp/oldrequirements.txt
+RUN virtualenv /tmp/tmpenv && /tmp/tmpenv/bin/pip install -r /tmp/oldrequirements.txt --src $HOME && rm -r /tmp/tmpenv
+COPY requirements.txt /tmp/requirements.txt
+RUN mkdir -p /tmp/dist
+RUN pip install -t /tmp/dist -r /tmp/requirements.txt
