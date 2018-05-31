@@ -1,27 +1,30 @@
-# Bob builds your dependencies
+# Building with Bob
 
 ## About
 
-Bob helps deploy Binaris functions that have native-code dependencies.
-It is required when the development platform does not match the
-Binaris platform.
+Bob builds and packages `pip` dependencies to be compatible with the Binaris function runtime environment.
 
-In future Binaris shall focus on a set of known binary dependencies
-built into the platform.  In the meantime, use Bob.
+## Quickstart
 
-## Platforms
+1. Create a Binaris Python2 function using 
 
-### SciPy
+   `bn create python2 foofunc`
+2. Add your pip dependencies to a `requirements.txt` file in your function directory
+3. Run `/path/to/bob/build.sh` to build the dependencies listed in `requirements.txt`
+4. `bn deploy foofunc`
 
-SciPy-Bob lets you depend on NumPy, SciPy and SciKit-learn.
+Step *3* should be repeated anytime `requirements.txt` is modified or changed
 
-To use SciPy-Bob:
+## Caching
 
-1. Go to your Binaris directory or create one using `bn create python2 <function name>`.
-2. (Optional) Add `requirements.txt` (otherwise it uses a useful default).
-3. Run `/path/to/bob/scipy/build.sh` to build dependencies.
-4. `bn deploy functionName`.
+`Bob` looks for the optional file `oldrequirements.txt` in the same directory where `requirements.txt` resides.
 
-Steps 1-3 build dependencies in the `dist/` subdirectory.  There is no
-need to repeat them unless `requirements.txt` changes.  The results
-are cached, to speed up future dependency builds.
+`oldrequirements.txt` can be viewed as a stable-state or checkpoint for `pip` dependencies listed in `requirements.txt`. 
+
+If the file is defined, `Bob` will build a cached state from the `oldrequirements.txt` dependencies which future module installations can utilize before fetching from the remote registry. In other words, on subsequent builds only the modules that are listed in `requirements.txt` and NOT listed in `oldrequirements.txt` will be fetched and downloaded. 
+
+In most cases simply running
+
+`cp requirements.txt oldrequirements.txt`
+
+will suffice, although periodically updating `oldrequirements.txt` may be beneficial.
