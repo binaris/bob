@@ -17,11 +17,11 @@ Step *3* should be repeated anytime `requirements.txt` is modified or changed
 
 ## Caching
 
-For most users, creating a copy of their existing `requirements.txt` by running
+You can substantially reduce build times by running
 
 `cp requirements.txt oldrequirements.txt`
 
-works well enough as a cache to substantially reduce build times.
+which allows your existing dependencies to be cached on subsequent builds.
 
 ### Why oldrequirements.txt?
 
