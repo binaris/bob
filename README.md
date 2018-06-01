@@ -17,14 +17,16 @@ Step *3* should be repeated anytime `requirements.txt` is modified or changed
 
 ## Caching
 
-`Bob` looks for the optional file `oldrequirements.txt` in the same directory where `requirements.txt` resides.
-
-`oldrequirements.txt` can be viewed as a stable-state or checkpoint for `pip` dependencies listed in `requirements.txt`. 
-
-If the file is defined, `Bob` will build a cached state from the `oldrequirements.txt` dependencies which future module installations can utilize before fetching from the remote registry. In other words, on subsequent builds only the modules that are listed in `requirements.txt` and NOT listed in `oldrequirements.txt` will be fetched and downloaded. 
-
-In most cases simply running
+For most users, creating a copy of their existing `requirements.txt` by running
 
 `cp requirements.txt oldrequirements.txt`
 
-will suffice, although periodically updating `oldrequirements.txt` may be beneficial.
+works well enough as a cache to substantially reduce build times.
+
+### Why oldrequirements.txt?
+
+`Bob` looks for the optional file `oldrequirements.txt` in the same directory where `requirements.txt` resides.
+
+`oldrequirements.txt` can be viewed as a stable-state or checkpoint for `pip` dependencies listed in `requirements.txt`.
+
+If the file is defined, `Bob` will build a cached state from the `oldrequirements.txt` dependencies which future module installations can utilize before fetching from the remote registry. In other words, on subsequent builds only the modules that are listed in `requirements.txt` and NOT listed in `oldrequirements.txt` will be fetched and downloaded. 
