@@ -13,9 +13,7 @@ else
     DOCKER='sudo docker'
 fi
 
-tmpdir='/tmp/bobdeps'
-
-mkdir -p $tmpdir
+tmpdir=$(mktemp -d)
 cp $dir/Dockerfile $tmpdir
 
 if [ -f $PWD/oldrequirements.txt ]; then
