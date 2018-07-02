@@ -2,7 +2,7 @@
 
 ## About
 
-Bob builds and packages `pip` dependencies to be compatible with the Binaris function runtime environment.
+Bob builds and packages `pip` dependencies for your functions using a container compatible with the Binaris runtime environment. By default `Bob` outputs dependencies to `$CWD/dist` (dir is created if non-existent).
 
 ## Quickstart
 
