@@ -6,11 +6,11 @@ Bob builds and packages `pip` dependencies for your functions using a container 
 
 ## Quickstart
 
-1. Create a Binaris Python2 function using 
+1. Create a Binaris Python2 or Python3 function using 
 
-   `bn create python2 foofunc`
+   `bn create <python2|python3> foofunc`
 2. Add your pip dependencies to a `requirements.txt` file in your function directory
-3. Run `/path/to/bob/build.sh` to build the dependencies listed in `requirements.txt`
+3. Run `/path/to/bob/build.sh <2|3>` to build the dependencies listed in `requirements.txt` for the specified python version
 4. `bn deploy foofunc`
 
 Step *3* should be repeated anytime `requirements.txt` is modified or changed
