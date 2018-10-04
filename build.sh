@@ -13,7 +13,7 @@ elif [ "$1" == "2" ]; then
 elif [ "$1" == "3" ]; then
    py_version=3
 else
-  echo "Unsupported python version, please either use '2' or '3'"
+  echo "Unsupported python version $1"
   exit 1
 fi
 
